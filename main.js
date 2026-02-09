@@ -45,3 +45,25 @@ function hideError() {
   errorElement.classList.add("hidden");
 }
 
+// Funció principal per obtenir dades (a implementar)
+async function fetchData() {
+  const searchTerm = searchInput.value;
+  const useAxios = apiSelector.value === "axios";
+
+  showLoading();
+  hideError();
+
+  try {
+    if (useAxios) {
+      await fetchDataWithAxios(searchTerm);
+    } else {
+      await fetchDataWithFetch(searchTerm);
+    }
+  } catch (error) {
+    console.log(error);
+    showError(`Error inesperado`);
+  } finally {
+    hideLoading();
+  }
+}
+
