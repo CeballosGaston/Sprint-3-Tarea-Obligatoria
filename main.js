@@ -104,3 +104,52 @@ function setupPagination(totalItems) {
   // ... (Implementa la lògica per crear els botons de paginació)
 }
 
+// Funció per obtenir dades amb Fetch (a implementar)
+async function fetchDataWithFetch(searchTerm) {
+  const params = new URLSearchParams();
+  params.append("_page", currentPage);
+  params.append("_limit", itemsPerPage);
+  params.append("q", searchTerm);
+
+  const url = new URL(API_URL);
+  url.search = params.toString();
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const totalItems = response.headers.get("X-Total-Count");
+    const data = await response.json();
+    displayResults(data, Number(totalItems));
+  } catch (error) {
+    showError(error.message);
+  };
+
+}
+
+// Funció per obtenir dades amb Axios (a implementar)
+
+async function fetchDataWithAxios(searchTerm) {
+  try {
+    const response = await axios.get(API_URL, {
+      params: {
+        _page: currentPage,
+        _limit: itemsPerPage,
+        ...(searchTerm && { q: searchTerm }),
+      },
+    });
+
+    const totalItems = response.headers["x-total-count"];
+    const data = response.data;
+    displayResults(data, Number(totalItems));
+  } catch (error) {
+    if (error.response) {
+      showError(`Error HTTP: ${error.response.status}`);
+    } else {
+      showError("Error de red o conexión");
+    }
+  }
+}
+
