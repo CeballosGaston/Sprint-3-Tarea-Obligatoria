@@ -25,3 +25,10 @@ function createCard() {
   return card;
 }
 
+function cleanResultContainer() {
+  resultsContainer.innerHTML = "";
+}
+function cleanPaginationContainer() {
+  paginationContainer.innerHTML = "";
+}
+
