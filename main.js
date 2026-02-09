@@ -13,3 +13,9 @@ const resultsContainer = document.getElementById("results");
 const paginationContainer = document.getElementById("paginationContainer");
 const numberButtons = document.getElementById("number-btns");
 
+fetchButton.addEventListener("click", fetchData);
+
+function showLoading() {
+  loadingElement.removeAttribute("hidden");
+}
+
