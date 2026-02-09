@@ -67,3 +67,40 @@ async function fetchData() {
   }
 }
 
+// Funció per a la visualització dels resultats i la paginació (a implementar)
+function displayResults(items, totalItems) {
+  cleanResultContainer();
+
+  items.forEach((element) => {
+    const card = createCard();
+    const paragraph = document.createElement("p");
+    paragraph.textContent = element.body;
+    card.appendChild(paragraph);
+    resultsContainer.appendChild(card);
+  });
+
+  setupPagination(totalItems);
+}
+
+function setupPagination(totalItems) {
+  cleanPaginationContainer();
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.classList.add("page-btn");
+    paginationContainer.appendChild(button);
+    button.addEventListener("click", () => {
+      currentPage = i;
+      fetchData();
+    });
+    if (i === currentPage) {
+      button.disabled = true;
+    }
+
+    paginationContainer.appendChild(button);
+  }
+
+  // ... (Implementa la lògica per crear els botons de paginació)
+}
+
