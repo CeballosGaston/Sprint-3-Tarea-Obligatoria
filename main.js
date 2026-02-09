@@ -32,3 +32,16 @@ function cleanPaginationContainer() {
   paginationContainer.innerHTML = "";
 }
 
+function showError(message) {
+  errorElement.innerHTML = message;
+  errorElement.removeAttribute("hidden");
+}
+
+function hideLoading() {
+  loadingElement.classList.add("hidden");
+}
+
+function hideError() {
+  errorElement.classList.add("hidden");
+}
+
