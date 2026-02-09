@@ -19,3 +19,9 @@ function showLoading() {
   loadingElement.removeAttribute("hidden");
 }
 
+function createCard() {
+  const card = document.createElement("div");
+  card.classList.add("cardClass");
+  return card;
+}
+
